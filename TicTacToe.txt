@@ -1,0 +1,104 @@
+# Setup
+board ← array[10] 
+FOR i <- 1 TO 9:    
+	board[i]=i  #”1”,”2”,”3”,”4”,”5”,”6”,”7”,”8”,”9”
+
+
+
+
+gameOver <- FALSE                       
+#Show the current state of the game board.
+FUNCTION printBoard(board):
+      Print board[1] | board [2] | board [3]
+	print --+--+--
+	Print board[4] | board [5] | board [6]
+	print --+--+--
+	Print board[7] | board [8] | board [9]
+	print --+--+--
+#Let Player 1 choose between X or O.
+FUNCTION chooseMarkers():
+    ASK Player 1: "Choose X or O"
+    IF choice = "X" THEN
+        RETURN ('X', 'O')
+    ELSE
+        RETURN ('O', 'X')
+    END IF
+END FUNCTION
+
+
+FUNCTION check_win(board, mark):
+    wins ← [
+        (1,2,3), (4,5,6), (7,8,9),   # rows
+        (1,4,7), (2,5,8), (3,6,9),   # columns
+        (1,5,9), (3,5,7)             # diagonals
+    ]
+    FOR each (a,b,c) in wins:
+        IF board[a]==mark AND board[b]==mark AND board[c]==mark:
+            RETURN TRUE
+    RETURN FALSE
+#Check whether the chosen position (1–9) is allowed.
+FUNCTION isValidMove(choice):
+	RETURN (1 <= choice <= 9)
+
+
+FUNCTION isTaken (choice):
+	RETURN board[choice] = ‘X’ OR board[choice] = ‘O’
+
+
+
+
+FUNCTION boardIsFull(board)
+	IF all positions in board contain 'X' or 'O'
+		RETURN TRUE
+	ELSE:
+		RETURN FALSE
+	END IF
+END FUNCTION
+
+
+FUNCTION switchPlayer():
+    IF currentPlayer = 'X':
+        currentPlayer ← 'O'
+    ELSE:
+        currentPlayer ← 'X'
+    END IF
+END FUNCTION
+
+
+
+# MAIN GAME
+
+
+WHILE NOT gameOver:
+    CALL printBoard(board)
+    ASK currentPlayer: "Enter a position (1–9): "
+    choice ← INPUT()
+
+
+    IF isValidMove(choice) AND NOT isTaken(choice) THEN
+        board[choice] ← currentPlayer
+    ELSE
+        PRINT "Invalid move. Try again."
+        CONTINUE
+    END IF
+
+
+    IF check_win(board, currentPlayer) THEN
+        CALL printBoard(board)
+        PRINT currentPlayer + " wins!"
+        gameOver ← TRUE
+
+
+    ELSE IF boardIsFull(board) THEN
+        CALL printBoard(board)
+        PRINT "It's a draw!"
+        gameOver ← TRUE
+
+
+    ELSE
+        CALL switchPlayer()
+    END IF
+END WHILE
+
+
+PRINT "Game Over. Thanks for playing!"
