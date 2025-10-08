@@ -1,6 +1,5 @@
 # Setup
 board = [str(i) for i in range(10)]
-currentPlayer = 'X'
 gameOver = False
 
 # Function to display the board
@@ -36,7 +35,7 @@ def isValidMove(choice):
         return False
     return 1 <= pos <= 9
 
-# FUnction to check if board position is taken
+# Function to check if board position is taken
 def isTaken(board, choice):
     return board[choice] in ('X', 'O')
 
