@@ -3,9 +3,9 @@
 This is a **two-player Tic-Tac-Toe game** built in Python.
 
 ## Overview
-- Two players take turns — one plays as **“X”**, the other as **“O”**.  
+- Two players take turns: One plays as **“X”**, the other as **“O”**.  
 - They place their marks on a **3×3 grid**.  
-- The goal is to get **three marks in a row**: horizontally, vertically or diagonally.  
+- The goal is to get **three marks in a row**: Horizontally, vertically or diagonally.  
 - If all spaces are filled and no one wins, the game ends in a **draw**.
 
 ## How It Works
